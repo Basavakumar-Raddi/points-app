@@ -1,0 +1,18 @@
+
+<div class="statInfo">
+  <div style="padding-left: 20px; color: black; font-weight: bold;">SUMMARY</div>
+  <div class="info"><span class="label">Min Value: </span>{{minValue | number:'1.0-2'}}</div>
+  <div class="info"><span class="label">Max Value: </span>{{maxValue | number:'1.0-2'}}</div>
+  <div class="info"><span class="label">Total Value: </span>{{totalValue | number:'1.0-2'}}</div>
+  <div class="info"><span class="label">Average Value: </span>{{averageValue | number:'1.0-2'}}</div>
+</div>
+
+
+<div class="parentGridDiv">
+  <ag-grid-angular style="width:600px; height:375px;" class="ag-theme-balham" [gridOptions]="gridOptions">
+  </ag-grid-angular>
+</div>
+
+<div class="btnDiv">
+  <button class="btn btn-primary" [disabled]="!rowSelected" (click)="deletePoint()"> Delete</button>
+</div>
