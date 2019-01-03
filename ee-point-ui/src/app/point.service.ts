@@ -14,8 +14,8 @@ export class PointService {
 
   constructor(private aHttp : Http, private http : HttpClient) { }
 
-  private userUrl = 'http://localhost:8080/viewPoints';
-  private delUrl = 'http://localhost:8080/deletePoint?id=';
+  private userUrl = 'http://localhost:8080/api/v1/points';
+  private delUrl = 'http://localhost:8080/api/v1/points?id=';
 
   public getPoints() {
     return this.aHttp.get(this.userUrl).pipe(map(response => {
