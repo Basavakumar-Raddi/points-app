@@ -40,7 +40,7 @@ public class PointControllerTest {
         mockSummaryDto.setTotalValue(100.50);
 
         Mockito.when(pointService.viewPoint()).thenReturn(mockSummaryDto);
-        RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/viewPoints").accept(MediaType.APPLICATION_JSON);
+        RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/api/v1/points").accept(MediaType.APPLICATION_JSON);
 
         MvcResult result = mockMvc.perform(requestBuilder).andReturn();
 
@@ -60,7 +60,7 @@ public class PointControllerTest {
         pointDTO.setId("4b423fb5-edd6-4255-b5cd-ab1f8d0e16cd");
 
         Mockito.when(pointService.addPoint(Mockito.any(PointDTO.class))).thenReturn(pointDTO);
-        RequestBuilder requestBuilder = MockMvcRequestBuilders.post("/addPoint")
+        RequestBuilder requestBuilder = MockMvcRequestBuilders.post("/api/v1/points")
                 .accept(MediaType.APPLICATION_JSON).content("{\"measurementDay\": \"2018-12-17\", \"location\": \"EE\", \"value\": 11.35} ")
                 .contentType(MediaType.APPLICATION_JSON);
 
@@ -68,7 +68,7 @@ public class PointControllerTest {
 
         String expected = "{\"response\": {\"id\": \"4b423fb5-edd6-4255-b5cd-ab1f8d0e16cd\", \"measurementDay\": \"2018-12-17\", "
                 + "\"location\": \"EE\", \"value\": 11.35}, \"success\": true, \"errorCode\": null, \"message\": \"Point added successfully\"}";
-        Assert.assertEquals(HttpStatus.OK.value(), result.getResponse().getStatus());
+        Assert.assertEquals(HttpStatus.CREATED.value(), result.getResponse().getStatus());
         JSONAssert.assertEquals(expected, result.getResponse()
                 .getContentAsString(), false);
     }
@@ -77,7 +77,7 @@ public class PointControllerTest {
     public void deletePointTest() throws Exception {
         Mockito.doNothing().when(pointService).deletePoint(Mockito.any(String.class));
 
-        RequestBuilder requestBuilder = MockMvcRequestBuilders.delete("/deletePoint?id=123");
+        RequestBuilder requestBuilder = MockMvcRequestBuilders.delete("/api/v1/points?id=123");
 
         MvcResult result = mockMvc.perform(requestBuilder).andReturn();
 
@@ -94,7 +94,7 @@ public class PointControllerTest {
         mockSummaryDto.setTotalValue(100.50);
 
         Mockito.when(pointService.viewPoint()).thenReturn(mockSummaryDto);
-        RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/viewPoints").accept(MediaType.APPLICATION_JSON);
+        RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/api/v1/points").accept(MediaType.APPLICATION_JSON);
 
         MvcResult result = mockMvc.perform(requestBuilder).andReturn();
 
@@ -113,7 +113,7 @@ public class PointControllerTest {
         pointDTO.setId("4b423fb5-edd6-4255-b5cd-ab1f8d0e16cd");
 
         Mockito.when(pointService.addPoint(Mockito.any(PointDTO.class))).thenReturn(pointDTO);
-        RequestBuilder requestBuilder = MockMvcRequestBuilders.post("/addPoint")
+        RequestBuilder requestBuilder = MockMvcRequestBuilders.post("/api/v1/points")
                 .accept(MediaType.APPLICATION_JSON).content("{\"measurementDay\": \"2018-12-17\", \"location\": \"EE\", \"value\": 11.35} ")
                 .contentType(MediaType.APPLICATION_JSON);
 
@@ -129,7 +129,7 @@ public class PointControllerTest {
     public void failDeletePointTest() throws Exception {
         Mockito.doNothing().when(pointService).deletePoint(Mockito.any(String.class));
 
-        RequestBuilder requestBuilder = MockMvcRequestBuilders.delete("/deletePoint?id=123");
+        RequestBuilder requestBuilder = MockMvcRequestBuilders.delete("/api/v1/points?id=123");
 
         MvcResult result = mockMvc.perform(requestBuilder).andReturn();
 
